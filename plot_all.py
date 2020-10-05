@@ -44,17 +44,19 @@ def get_data(person="S1", ch="B", turn=1):
         event_target[:, i] = cols[13 * (turn - 1) + 1:13 * turn]
 
     # 获取对应轮次的脑电数据
-    train_target = np.zeros((event_target[11, 1] - event_target[0, 1] + 151, 20))
+    train_target = np.zeros((event_target[11, 1] - event_target[0, 1] + 150, 20))
+    print(event_target[11, 1] - event_target[0, 1]+1)
+    print(np.shape(train_target))
     for j in range(train_size[1]):
         cols = train_data.col_values(j)
-        train_target[:, j] = cols[event_target[0, 1] - 1:event_target[11, 1] + 150]
+        train_target[:, j] = cols[event_target[0, 1]:event_target[11, 1] + 150]
 
-    return train_target,event_target
+    return train_target, event_target
 
 
 # 函数入口，用于绘制指定测试者的相应字符的各轮脑电图
 def main(person="S1", ch="B", turn=1):
-    train,_ = get_data(person, ch, turn)  # 获取脑电波数据
+    train, _ = get_data(person, ch, turn)  # 获取脑电波数据
 
     # 数据可视化，绘制20个通道的折线图
     plt.plot(train)
@@ -68,4 +70,4 @@ def main(person="S1", ch="B", turn=1):
 
 
 if __name__ == "__main__":
-    main(person="S1", ch="9", turn=5)
+    main(person="S1", ch="B", turn=5)
