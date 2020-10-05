@@ -26,6 +26,6 @@ if __name__ == "__main__":
     train_data = np.sum(train_data, axis=1)
 
     # data1 = np.sum(data1, axis=1)
-    i = 10  # 在一轮实验中的次序
+    i = 10  # 在一轮实验中的次序,可取0~11之间的值
     new_data = train_data[event_data[i, 1] - event_data[0, 1]:event_data[i, 1] - event_data[0, 1] + 150]
     butter_filter(data=new_data, n=150)  # 对脑电波进行巴特沃斯滤波
